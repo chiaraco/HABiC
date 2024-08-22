@@ -30,7 +30,7 @@ from functionsHABiC import classification
 
 #######################################################
 ##### load your data
-to_load = '/home/ico/Documents/article_HungClassifier/article2/0_creation_datasets'
+to_load = '/chiaraco/HABiC/data'
 
 data = "synthetique_sklearn"
 
