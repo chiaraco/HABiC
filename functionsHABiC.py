@@ -188,30 +188,30 @@ class HungarianAlgo:
                 self.__improveLabels(val, S, T)
             # now we are sure that (u,v) is saturated
             assert self.__slack(u, v) == 0
-            T[v] = u                                                                     # add (u,v) to the tree
+            T[v] = u
             if v in self.Mv:
-                u1 = self.Mv[v]                                                          # matched edge, 
+                u1 = self.Mv[v]
                 assert not u1 in S
-                S[u1] = True                                                             # ... add endpoint to tree 
-                for v in self.V:                                                         # maintain minSlack
+                S[u1] = True
+                for v in self.V:
                     if not v in T and self.minSlack[v][0] > self.__slack(u1, v):
                         self.minSlack[v] = [self.__slack(u1 ,v), u1]
             else:
-                self.__improveMatching(v, T)                                             # v is a free vertex
+                self.__improveMatching(v, T)
                 return
 
     def minWeightMatching(self, init_M = True):
 
         if init_M:
-            self.init_assign()                                                           # try to start with non-empty matching
+            self.init_assign()
         while len(self.Mu) < self.dim:
-            free = [u for u in self.V if u not in self.Mu]                               # choose free vertex u0
+            free = [u for u in self.V if u not in self.Mu]
             u0 = free[0]
-            S = {u0: True}                                                               # grow tree from u0 on
+            S = {u0: True}
             T = {}
-            self.minSlack = [[self.__slack(u0, v), u0] for v in self.V]                  # init T = {}, donc calcul (c(u0,v) - phi(u0) - psi(v), u0)} pour chaque v dans V
+            self.minSlack = [[self.__slack(u0, v), u0] for v in self.V]
             self.__augment(S, T)
-        val = sum(self.phi) + sum(self.psi)                                              # val. of matching is total edge weight
+        val = sum(self.phi) + sum(self.psi)
         return (self.Mu, self.Mv, val)
 
     def getPhiPsi(self):
