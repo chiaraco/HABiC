@@ -16,30 +16,35 @@ from torch import FloatTensor, cuda, nn, mean, rand, ones
 from torch.optim import LBFGS, SGD, Adam
 from torch.autograd import Variable, grad
 
-
+# GPU can be used to accelerate Wasserstein Neural Network fitting
 if cuda.is_available(): dev = "cuda:0"
 else: dev = "cpu"
 
-
+# import function required for classification
 from functionsHABiC import classification
+
 
 
 #######################################################
 ######################### MAIN ########################
 #######################################################
 
+
 #######################################################
 ##### load your data
 to_load = '/chiaraco/HABiC/data'
-
 data = "synthetique_sklearn"
 
+# load train dataset, the variable to be predicted (Y) separated from the variables allowing learning (X)
 data_train = pd.read_csv(f'{to_load}/{data}/train.csv',header=0,index_col=0)
-data_valid = pd.read_csv(f'{to_load}/{data}/valid.csv',header=0,index_col=0)
 X = data_train.drop('Y',axis=1)
 Y = data_train['Y'].copy()
-Xval = [data_valid.drop('Y',axis=1)]
+
+# put your validation datasets into a list and give each one a name
+data_valid = pd.read_csv(f'{to_load}/{data}/valid.csv',header=0,index_col=0)
+Xval = [data_valid.drop('Y',axis=1)] 
 Yval = [data_valid['Y'].copy()]
+Nval = ['Val']
 
 
 #######################################################
@@ -76,7 +81,7 @@ params = {'meth':'Wass-NN', 'struct':{'hidden_layer_sizes':(300,300,300), \
 ## - 'MCC' (Matthews Correlation Coefficient)
 ## - 'ACC' (accuracy score)
 
-perf = classification(X,Y,Xval,Yval,Nval=['Val'],param=params,metr='MCC')
+perf = classification(X, Y, Xval, Yval, Nval, param=params, metr='MCC')
 print(perf)
 
 
