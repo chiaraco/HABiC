@@ -144,7 +144,7 @@ def balancedData(X,Y):
 def CostMatrix(X0,X1):
     return manhattan_distances(X0,X1)
 
-class HungarianAlgo:
+class HungarianAlgo: #### inspired by https://gist.github.com/KartikTalwar/3158534
 
     def __init__(self, weights):
         self.weights = weights
