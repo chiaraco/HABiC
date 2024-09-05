@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.model_selection import GridSearchCV, StratifiedShuffleSplit
 from sklearn.ensemble import RandomForestClassifier as RFC
 from sklearn.metrics import matthews_corrcoef as MCC, accuracy_score as ACC
+from sklearn.metrics import roc_curve, auc
 from tqdm import tqdm
 import time
 import os
@@ -291,6 +292,9 @@ def performances(y,sc,threshold,metr):
     sc[~cond]=0
     if metr=='MCC' : p = MCC(y,sc)
     elif metr=='ACC': p = ACC(y,sc)
+    elif metr=='AUC' : 
+        fpr, tpr, thresholds = roc_curve(y,sc)
+        p = auc(fpr,tpr)
     return p
 
 

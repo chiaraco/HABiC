@@ -33,58 +33,75 @@ from functionsHABiC import classification
 #######################################################
 ##### load your data
 to_load = '/chiaraco/HABiC/data'
-data = "synthetique_sklearn"
 
 # load train dataset, the variable to be predicted (Y) separated from the variables allowing learning (X)
-data_train = pd.read_csv(f'{to_load}/{data}/train.csv',header=0,index_col=0)
+data_train = pd.read_csv(f'{to_load}/train.csv',header=0,index_col=0)
 X = data_train.drop('Y',axis=1)
 Y = data_train['Y'].copy()
 
 # put your validation datasets into a list and give each one a name
-data_valid = pd.read_csv(f'{to_load}/{data}/valid.csv',header=0,index_col=0)
+data_valid = pd.read_csv(f'{to_load}/valid.csv',header=0,index_col=0)
 Xval = [data_valid.drop('Y',axis=1)] 
 Yval = [data_valid['Y'].copy()]
 Nval = ['Val']
 
 
 #######################################################
-##### choose your algorihtm and change its parameters if you want
+##### test all algorihtms (you can change parameters)
+
 
 # if naive.HABiC
-params = {'meth':'naive.HABiC'}
+params_naive = {'meth':'naive.HABiC'}
 
 # if redPCA.HABiC
-params = {'meth':'redPCA.HABiC', 'DimRed':100}
+params_redPCA = {'meth':'redPCA.HABiC', 'DimRed':100}
 
 # if redPLS.HABiC
-params = {'meth':'redPLS.HABiC', 'DimRed':100}
+params_redPLS = {'meth':'redPLS.HABiC', 'DimRed':100}
 
 # if bagSTD.HABiC
-params = {'meth':'bagSTD.HABiC', 'NbTrees':50}
+params_bagSTD = {'meth':'bagSTD.HABiC', 'NbTrees':50}
 
 # if bagRF.HABiC
-params = {'meth':'bagRF.HABiC', 'NbTrees':50, 'NbVarImp':3}
+params_bagRF = {'meth':'bagRF.HABiC', 'NbTrees':50, 'NbVarImp':3}
 
 # if bagPLS.HABiC
-params = {'meth':'bagPLS.HABiC', 'NbTrees':50, 'NbVarImp':3}
+params_bagPLS = {'meth':'bagPLS.HABiC', 'NbTrees':50, 'NbVarImp':3}
 
 # if Wass-NN
-params = {'meth':'Wass-NN', 'struct':{'hidden_layer_sizes':(300,300,300), \
+params_WassNN = {'meth':'Wass-NN', 'struct':{'hidden_layer_sizes':(300,300,300), \
           'activation':'relu', 'solver':'adam', 'batch_size':64, \
           'learning_rate_init':0.0001, 'max_iter':10, 'lambd':10}}
 
 
+
 #######################################################
-##### its performances
+##### performances
 
-# you can choose as metric :
+# choose a metric between these :
 ## - 'MCC' (Matthews Correlation Coefficient)
-## - 'ACC' (accuracy score)
+## - 'ACC' (Accuracy score)
+## - 'AUC' (Area Under the Curve)
+metr = 'MCC'
 
-perf = classification(X, Y, Xval, Yval, Nval, param=params, metr='MCC')
-print(perf)
+nb_CV = 3
 
+params = ['params_naive', 'params_redPCA', 'params_redPLS', 'params_bagSTD', \
+           'params_bagRF', 'params_bagPLS', 'params_WassNN']
 
+results = pd.DataFrame(index=pd.MultiIndex.from_product([params,[f'CV{cv}' for cv in range(1,nb_CV+1)]]),columns=['Train','Test']+Nval)
+
+sss = StratifiedShuffleSplit(n_splits=nb_CV, test_size=0.3, random_state=0)
+for fold, (train_index, test_index) in enumerate(sss.split(X,Y)):
+    print('FOLD',fold+1)
+    xtrain_cv, xtest_cv = X.iloc[train_index,:], X.iloc[test_index,:]
+    ytrain_cv, ytest_cv = Y.iloc[train_index], Y.iloc[test_index]
+
+    for param in params :
+        perf = classification(xtrain_cv, ytrain_cv, [xtest_cv]+Xval, [ytest_cv]+Yval, ['Test']+Nval, param=eval(param), metr=metr)
+        results.loc[(param,f'CV{fold+1}')] = perf
+
+print(results.groupby(level=0).mean(),results.groupby(level=0).std(),sep='\n')
 
 
 
