@@ -32,7 +32,7 @@ from functionsHABiC import classification
 
 #######################################################
 ##### load your data
-to_load = '/chiaraco/HABiC/data'
+to_load = 'data'
 
 # load train dataset, the variable to be predicted (Y) separated from the variables allowing learning (X)
 data_train = pd.read_csv(f'{to_load}/train.csv',header=0,index_col=0)
