@@ -52,7 +52,7 @@ perf = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], 
 
 ## Synthetic data
 For a complete running example, please see [scriptHABiC.py](scriptHABiC.py).
-The code generates two DataFrames with prediction performances (mean and std) of all presented algorithms. 
+The code generates two DataFrames with prediction performances (mean and standard deviation) of all presented algorithms. 
 
 To run the example code, simply activate the conda environment and execute the code from the root of the project:
 ```bash
