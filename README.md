@@ -23,7 +23,7 @@ from functionsHABiC import classification
 
 #######################################################
 ##### load your data
-X, Y, Xval, Yval = ...
+X, Y, Xval1, Yval1, Xval2, Yval2 = ...
 
 #######################################################
 ##### test an algorihtm
@@ -32,7 +32,7 @@ params_naive = {'meth':'naive.HABiC'}
 
 #######################################################
 ##### performances
-perf = classification(X, Y, [Xval], [Yval], ['Valid.'], param=params_naive, metr='MCC')
+perf = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], param=params_naive, metr='MCC')
 ```
 
 
@@ -51,46 +51,11 @@ perf = classification(X, Y, [Xval], [Yval], ['Valid.'], param=params_naive, metr
 
 
 ## Synthetic data
-For a complete running example, please see [examples/explain_mnist.py](examples/explain_mnist.py).
-The code generates this plot: 
-<img src="examples/plots/mnist_explanations.png" style="max-width: 500px;"/>
+For a complete running example, please see [scriptHABiC.py](scriptHABiC.py).
+The code generates two DataFrames with prediction performances (mean and std) of all presented algorithms. 
 
 To run the example code, simply activate the conda environment and execute the code from the root of the project:
 ```bash
-> conda activate torchlrp
-> python examples/explain_mnist.py
+> conda activate HABiCenv
+> python script_HABiC.py
 ```
-
-
-## References
-[1] Bach, S., Binder, A., Montavon, G., Klauschen, F., Müller, K.R. and Samek, W., 2015. On pixel-wise explanations for non-linear classifier decisions by layer-wise relevance propagation. PloS one, 10(7), p.e0130140.  
-[2] Kindermans, P.J., Schütt, K.T., Alber, M., Müller, K.R., Erhan, D., Kim, B. and Dähne, S., 2017. Learning how to explain neural networks: Patternnet and patternattribution. arXiv preprint arXiv:1705.05598.  
-[3] Montavon, G., Binder, A., Lapuschkin, S., Samek, W. and Müller, K.R., 2019. Layer-wise relevance propagation: an overview. In Explainable AI: interpreting, explaining and visualizing deep learning (pp. 193-209). Springer, Cham.  
-
-
-
-
-
-
-# if naive.HABiC
-params_naive = {'meth':'naive.HABiC'}
-
-# if redPCA.HABiC
-params_redPCA = {'meth':'redPCA.HABiC', 'DimRed':100}
-
-# if redPLS.HABiC
-params_redPLS = {'meth':'redPLS.HABiC', 'DimRed':100}
-
-# if bagSTD.HABiC
-params_bagSTD = {'meth':'bagSTD.HABiC', 'NbTrees':50}
-
-# if bagRF.HABiC
-params_bagRF = {'meth':'bagRF.HABiC', 'NbTrees':50, 'NbVarImp':3}
-
-# if bagPLS.HABiC
-params_bagPLS = {'meth':'bagPLS.HABiC', 'NbTrees':50, 'NbVarImp':3}
-
-# if Wass-NN
-params_WassNN = {'meth':'Wass-NN', 'struct':{'hidden_layer_sizes':(300,300,300), \
-          'activation':'relu', 'solver':'adam', 'batch_size':64, \
-          'learning_rate_init':0.0001, 'max_iter':10, 'lambd':10}}
