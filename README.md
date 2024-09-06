@@ -57,5 +57,5 @@ The code generates two DataFrames with prediction performances (mean and std) of
 To run the example code, simply activate the conda environment and execute the code from the root of the project:
 ```bash
 > conda activate HABiCenv
-> python script_HABiC.py
+> python scriptHABiC.py
 ```
