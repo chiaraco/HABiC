@@ -119,7 +119,7 @@ gq = function(platform1.data, platform2.data, p1.names=0, p2.names=0, skip.match
 
 
 normalizeGQ <- function(M, pf, ...) { 
-  #This function was provided by Xiao-Qin Xia, one of the authors of webarraydb modified MRS
+  # This function was provided by Xiao-Qin Xia, one of the authors of webarraydb modified MRS
   # M is the data matrix
   # pf is the vector to specify the platform for each column of M.
   idx <- split(seq(pf), pf)
@@ -147,8 +147,7 @@ normalizeGQ <- function(M, pf, ...) {
 
 setwd("tcga")
 
-exprSet <- readRDS("exprSet.rds")   # from STEP1
-exprSet <- exprSet[-1]   # remove "count" dataset from the list (1st one)
+exprSet <- readRDS("exprSet.rds")
 sampleAnnot <- readRDS("sampleAnnot.rds")
 
 sampleAnnot_All <- list()
