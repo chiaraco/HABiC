@@ -51,7 +51,7 @@ perf = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], 
 
 
 ## Synthetic data
-For a complete running example, please see [scriptHABiC.py](scriptHABiC.py).
+For a complete running example on synthetic dataset, please see [scriptHABiC.py](scriptHABiC.py).
 The code generates two DataFrames with prediction performances (mean and standard deviation) of all presented algorithms. 
 
 To run the example code, simply activate the conda environment and execute the code from the root of the project:
@@ -59,3 +59,7 @@ To run the example code, simply activate the conda environment and execute the c
 > conda activate HABiCenv
 > python scriptHABiC.py
 ```
+
+
+## Transcriptomics data preprocessing
+The script [preprocessing.R](preprocessing.R) is available so you can mimic our way of preprocessing transcriptomics data.
