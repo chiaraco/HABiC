@@ -15,41 +15,38 @@ executing the following command:
 
 The code can be used as follows:
 
-```python 
-import torch
-import lrp
+```python
+#######################################################
+##### import required functions
+from sklearn.metrics import matthews_corrcoef as MCC
+from functionsHABiC import classification
 
-model = Sequential(
-    lrp.Conv2d(1, 32, 3, 1, 1),
-    torch.nn.ReLU(),
-    torch.nn.MaxPool2d(2, 2),
-    torch.nn.Flatten(),
-    lrp.Linear(14*14*32, 10)
-)
+#######################################################
+##### load your data
+X, Y, Xval, Yval = ...
 
-x = ... # business as usual
-y_hat = model.forward(x, explain=True, rule="alpha2beta1")
-y_hat = y_hat[torch.arange(batch_size), y_hat.max(1)[1]] # Choose maximizing output neuron
-y_hat = y_hat.sum()
+#######################################################
+##### test an algorihtm
+# if naive.HABiC
+params_naive = {'meth':'naive.HABiC'}
 
-# Backward pass (do explanation)
-y_hat.backward()
-explanation = x.grad
+#######################################################
+##### performances
+perf = classification(X, Y, [Xval], [Yval], ['Valid.'], param=params_naive, metr='MCC')
 ```
 
 
-**Implemented rules:**
-|Rule 							|Key 					| Note 												|
-|:------------------------------|:----------------------|:--------------------------------------------------|
-|epsilon-rule					| "epsilon" 			| Implemented but epsilon fixed to `1e-1` 			|
-|gamma-rule						| "gamma" 				| Implemented but gamma fixed to `1e-1`				|
-|epsilon-rule					| "epsilon" 			| gamma and epsilon fixed to `1e-1`					|
-|alpha=1 beta=0 				| "alpha1beta0" 		| 													|
-|alpha=2 beta=1 				| "alpha2beta1" 		| 													|
-|PatternAttribution (all) 		| "patternattribution" 	| Use additional argument `pattern=patterns_all` 	|
-|PatternAttribution (positive) 	| "patternattribution" 	| Use additional argument `pattern=patterns_pos` 	|
-|PatternNet (all) 				| "patternnet" 			| Use additional argument `pattern=patterns_all` 	|
-|PatternNet (positive) 			| "patternnet" 			| Use additional argument `pattern=patterns_pos` 	|
+**Implemented method:**
+| Method 						                    | Key 					| Parameters 										                                                                            |
+|:--------------------------------------------------|:----------------------|:------------------------------------------------------------------------------------------------------------------------------|
+| HABiC (naive approach)	                        | "naive.HABiC" 		|                                         			                                                                            |
+| HABiC after reduction by PCA					    | "redPCA.HABiC" 		| 'DimRed' : reduction dimension            	                                                                                |
+| HABiC after reduction by PLS-DA				    | "redPLS.HABiC" 		| 'DimRed' : reduction dimension    					                                                                        |
+| HABiC with standard bagging				        | "bagSTD.HABiC" 		| 'NbTrees' : number of sub-algorithms				                                                                            |
+| HABiC with bagging and RF feature selection 		| "bagRF.HABiC" 		| 'NbTrees' : number of sub-algorithms, 'NbVarImp' : number of features to select	                                            |
+| HABiC with bagging and PLS-DA feature selection	| "bagPLS.HABiC" 	    | 'NbTrees' : number of sub-algorithms, 'NbVarImp' : number of features to select	                                            |
+| Wasserstein Neural Netwrok 	                    | "Wass-NN" 	        | 'struct' : net architecture ('hidden_layer_sizes','activation','solver','batch_size','learning_rate_init','max_iter','lambd') |
+
 
 
 
