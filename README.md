@@ -36,7 +36,7 @@ perf = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], 
 ```
 
 
-**Implemented method:**
+**Implemented methods:**
 | Method 						                    | Key 					| Parameters 										                                                                            |
 |:--------------------------------------------------|:----------------------|:------------------------------------------------------------------------------------------------------------------------------|
 | HABiC (naive approach)	                        | "naive.HABiC" 		|                                         			                                                                            |
@@ -45,7 +45,7 @@ perf = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], 
 | HABiC with standard bagging				        | "bagSTD.HABiC" 		| 'NbTrees' : number of sub-algorithms				                                                                            |
 | HABiC with bagging and RF feature selection 		| "bagRF.HABiC" 		| 'NbTrees' : number of sub-algorithms, 'NbVarImp' : number of features to select	                                            |
 | HABiC with bagging and PLS-DA feature selection	| "bagPLS.HABiC" 	    | 'NbTrees' : number of sub-algorithms, 'NbVarImp' : number of features to select	                                            |
-| Wasserstein Neural Netwrok 	                    | "Wass-NN" 	        | 'struct' : net architecture ('hidden_layer_sizes','activation','solver','batch_size','learning_rate_init','max_iter','lambd') |
+| Wasserstein Neural Netwrok 	                    | "Wass-NN" 	        | 'struct' : net architecture ('hidden_layer_sizes', 'activation', 'solver', 'batch_size', 'learning_rate_init', 'max_iter', 'lambd') |
 
 
 
