@@ -36,7 +36,7 @@ perf = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], 
 ```
 
 
-**Implemented method:**
+**Implemented methods:**
 | Method 						                    | Key 					| Parameters 										                                                                            |
 |:--------------------------------------------------|:----------------------|:------------------------------------------------------------------------------------------------------------------------------|
 | HABiC (naive approach)	                        | "naive.HABiC" 		|                                         			                                                                            |
