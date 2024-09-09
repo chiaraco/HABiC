@@ -93,19 +93,16 @@ results = pd.DataFrame(index=pd.MultiIndex.from_product([params,[f'CV{cv}' for c
 
 sss = StratifiedShuffleSplit(n_splits=nb_CV, test_size=0.3, random_state=0)
 for fold, (train_index, test_index) in enumerate(sss.split(X,Y)):
-    print('FOLD',fold+1)
+    print('\nFOLD',fold+1)
     xtrain_cv, xtest_cv = X.iloc[train_index,:], X.iloc[test_index,:]
     ytrain_cv, ytest_cv = Y.iloc[train_index], Y.iloc[test_index]
 
     for param in params :
+        print('--->',param)
         perf = classification(xtrain_cv, ytrain_cv, [xtest_cv]+Xval, [ytest_cv]+Yval, ['Test']+Nval, param=eval(param), metr=metr)
         results.loc[(param,f'CV{fold+1}')] = perf
 
-print(results.groupby(level=0).mean(),results.groupby(level=0).std(),sep='\n')
-
-
-
-
+print('\nMean',results.groupby(level=0).mean(),'\nStd',results.groupby(level=0).std(),'\n',sep='\n')
 
 
 
