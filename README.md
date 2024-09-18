@@ -65,7 +65,7 @@ To run the example code, simply activate the conda environment and execute the c
 The script [preprocessing.R](preprocessing.R) is available so you can mimic our way of preprocessing transcriptomics data.
 
 
-###########################################################################
+# License
 
    Copyright 2024 INSTITUT DE CANCEROLOGIE DE L'OUEST and UNIVERSITE ANGERS
 
