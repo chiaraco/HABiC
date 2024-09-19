@@ -16,7 +16,7 @@ extVal_expMat  # load external validation expression dataframe (other platform),
 
 # from publication: Bioinformatics 2020   https://doi.org/10.1093/bioinformatics/btz974
 # MatchMixeR: a cross-platform normalization method for gene expression data integration
-# Serin Zhang, Jiang Shao, Disa Yu, Xing Qiu,corresponding author and Jinfeng Zhangcorresponding author
+# Serin Zhang, Jiang Shao, Disa Yu, Xing Qiu,and Jinfeng Zhang
 
 # https://github.com/dy16b/Cross-Platform-Normalization 
 
