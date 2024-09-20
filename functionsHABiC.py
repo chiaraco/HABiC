@@ -131,7 +131,7 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
             pred[n] = predictions(y,sc,threshold)
 
 
-    return perf
+    return pred
 
 
 def balancedData(X,Y):
