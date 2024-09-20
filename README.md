@@ -1,12 +1,11 @@
 # Implementation of HABiC and Wass-NN
 
 ## Installation
-To install requirements, refer to the [`requirements.yml`](requirements.yml)
-file.
+To install requirements, refer to the [`requirements.yml`](requirements.yml) file.
 
-If you use `conda`, then you can install an environment called `HABiCenv` by
-executing the following command: 
+If you use `conda`, then you can install an environment called `HABiCenv`. First, clone this repository ([Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)) or download it ([Downloading a repository](https://docs.github.com/en/get-started/start-your-journey/downloading-files-from-github)). 
 
+Then, open an Anaconda prompt in the HABiC folder and run the following command :
 ```bash
 > conda env create -f requirements.yml
 ```
