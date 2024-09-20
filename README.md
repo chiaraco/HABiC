@@ -3,7 +3,7 @@
 ## Installation
 To install requirements, refer to the [`requirements.yml`](requirements.yml) file.
 
-If you use `conda`, then you can install an environment called `HABiCenv`. First, clone this repository ([Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)) or download it ([Downloading a repository](https://docs.github.com/en/get-started/start-your-journey/downloading-files-from-github)). 
+If you are using `conda`, you can install an environment called `HABiCenv`. First, clone this repository ([Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)) or download it ([Downloading a repository](https://docs.github.com/en/get-started/start-your-journey/downloading-files-from-github)). 
 
 Then, open an Anaconda prompt in the HABiC folder and run the following command :
 ```bash
