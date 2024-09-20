@@ -38,7 +38,7 @@ params_naive = {'meth':'naive.HABiC'}
 
 #######################################################
 ##### performances
-pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], param=params_naive, metr='MCC')
+pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], param=params_naive)
 ```
 
 
