@@ -43,7 +43,7 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},metr
 
         # prediction performances
         for y,n,sc in zip([Y]+Yval,['Train']+Nval,scores):
-            p = performances(y,sc,threshold,metr)
+            pred,p = performances(y,sc,threshold,metr)
             perf[n] = p
 
     ## dimensionality reduction + HABiC
@@ -286,17 +286,19 @@ def naiveHABiC(X,Y,Xval=[],Yval=[],Nval=[],mult=10**2):
     return scores
 
 
-def performances(y,sc,threshold,metr):
+def predictions(y,sc,threshold):
     cond = sc>=threshold
     sc[cond]=1
     sc[~cond]=0
+    return sc
+
+def performances(y,sc,metr):
     if metr=='MCC' : p = MCC(y,sc)
     elif metr=='ACC': p = ACC(y,sc)
     elif metr=='AUC' : 
         fpr, tpr, thresholds = roc_curve(y,sc)
         p = auc(fpr,tpr)
     return p
-
 
 def reduction(X,Y,Xval,RedMeth,DimRed):
     if RedMeth == 'PLS' : transfo = PLSRegression(n_components=DimRed, scale=False)
