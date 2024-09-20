@@ -27,10 +27,10 @@ else: dev = "cpu"
 ###################### FUNCTIONS ######################
 #######################################################
 
-def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},metr='MCC',mult=10**2):
+def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult=10**2):
 
-    perf = {}
-
+    pred = {}
+    
     # resampling for balanced data
     X,Y = balancedData(X,Y)
 
@@ -43,8 +43,8 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},metr
 
         # prediction performances
         for y,n,sc in zip([Y]+Yval,['Train']+Nval,scores):
-            pred = predictions(y,sc,threshold)
-            perf[n] = pred
+            pred[n] = predictions(y,sc,threshold)
+            
 
     ## dimensionality reduction + HABiC
     # PCA
@@ -59,8 +59,8 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},metr
 
         # prediction performances
         for y,n,sc in zip([Y]+Yval,['Train']+Nval,scores):
-            pred = predictions(y,sc,threshold)
-            perf[n] = pred
+            pred[n] = predictions(y,sc,threshold)
+
 
     # PLS
     elif param['meth'] == 'redPLS.HABiC' :
@@ -74,8 +74,8 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},metr
 
         # prediction performances
         for y,n,sc in zip([Y]+Yval,['Train']+Nval,scores):
-            pred = predictions(y,sc,threshold)
-            perf[n] = pred
+            pred[n] = predictions(y,sc,threshold)
+
 
     ## bagging + HABiC
     # Standard bagging
@@ -88,8 +88,8 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},metr
 
         # prediction performances
         for y,n,sc in zip([Y]+Yval,['Train']+Nval,scores):
-            pred = predictions(y,sc,threshold)
-            perf[n] = pred
+            pred[n] = predictions(y,sc,threshold)
+ 
 
     # Random Forest bagging
     elif param['meth'] == 'bagRF.HABiC' :
@@ -101,8 +101,8 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},metr
 
         # prediction performances
         for y,n,sc in zip([Y]+Yval,['Train']+Nval,scores):
-            pred = predictions(y,sc,threshold)
-            perf[n] = pred
+            pred[n] = predictions(y,sc,threshold)
+
 
     # PLS-DA bagging
     elif param['meth'] == 'bagPLS.HABiC' :
@@ -114,8 +114,8 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},metr
 
         # prediction performances
         for y,n,sc in zip([Y]+Yval,['Train']+Nval,scores):
-            pred = predictions(y,sc,threshold)
-            perf[n] = pred
+            pred[n] = predictions(y,sc,threshold)
+
 
     ## Deep Learning method
     elif param['meth'] == 'Wass-NN' :
@@ -128,8 +128,8 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},metr
         for x,y,n in zip([X]+Xval,[Y]+Yval,['Train']+Nval):
             sc = clf.score_prediction(x)
             if n == 'Train' : threshold = sc.mean()
-            pred = predictions(y,sc,threshold)
-            perf[n] = pred
+            pred[n] = predictions(y,sc,threshold)
+
 
     return perf
 
