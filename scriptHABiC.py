@@ -21,7 +21,7 @@ if cuda.is_available(): dev = "cuda:0"
 else: dev = "cpu"
 
 # import function required for classification
-from functionsHABiC import classification
+from functionsHABiC import classification, performances
 
 
 
@@ -99,8 +99,10 @@ for fold, (train_index, test_index) in enumerate(sss.split(X,Y)):
 
     for param in params :
         print('--->',param)
-        perf = classification(xtrain_cv, ytrain_cv, [xtest_cv]+Xval, [ytest_cv]+Yval, ['Test']+Nval, param=eval(param), metr=metr)
-        results.loc[(param,f'CV{fold+1}')] = perf
+        pred = classification(xtrain_cv, ytrain_cv, [xtest_cv]+Xval, [ytest_cv]+Yval, ['Test']+Nval, param=eval(param))
+        for y_true,samp in zip([ytrain_cv,ytest_cv]+Yval,['Train','Test']+Nval):
+            perf = performances(y_true,pred[samp], metr=metr)
+            results.loc[(param,f'CV{fold+1}'),samp] = perf
 
 print('\nMean',results.groupby(level=0).mean(),'\nStd',results.groupby(level=0).std(),'\n',sep='\n')
 
