@@ -17,6 +17,7 @@ The code can be used as follows:
 ```python
 #######################################################
 ##### import required functions
+import pandas
 from sklearn.metrics import matthews_corrcoef as MCC
 from functionsHABiC import classification
 
@@ -24,8 +25,8 @@ from functionsHABiC import classification
 ##### load your data
 
 # training data
-X = ... # observations in row, genes (and categorical variables) in column
-Y = ... # class to predict
+X = pandas.read_csv(...) # pandas DataFrame with observations in row, genes (and categorical variables) in column
+Y = pandas.read_csv(...) # pandas Series with class to predict
 
 # validation data
 Xval1, Yval1, Xval2, Yval2 = ...
