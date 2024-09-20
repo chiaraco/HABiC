@@ -23,7 +23,13 @@ from functionsHABiC import classification
 
 #######################################################
 ##### load your data
-X, Y, Xval1, Yval1, Xval2, Yval2 = ...
+
+# training data
+X = ... # observations in row, genes (and categorical variables) in column
+Y = ... # class to predict
+
+# validation data
+Xval1, Yval1, Xval2, Yval2 = ...
 
 #######################################################
 ##### test an algorihtm
