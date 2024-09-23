@@ -22,7 +22,7 @@ The code can be used as follows:
 
 import pandas
 from sklearn.metrics import matthews_corrcoef as MCC
-from functionsHABiC import classification
+from functionsHABiC import classification  # you should be in the folder where functionsHABiC.py is.
 
 #######################################################
 ##### load your data
@@ -77,7 +77,7 @@ pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], 
 For a complete running example on synthetic dataset, please see [scriptHABiC.py](scriptHABiC.py).
 The code generates two DataFrames with prediction performances (mean and standard deviation) of all presented algorithms. 
 
-To run the example code, simply activate the conda environment and execute the code from the root of the project:
+To run the example code, activate the conda environment and execute the code from the root of the project:
 ```bash
 > conda activate HABiCenv
 > python scriptHABiC.py
@@ -85,7 +85,7 @@ To run the example code, simply activate the conda environment and execute the c
 
 
 ## Transcriptomics data preprocessing
-When using transcriptomics data, validation datasets are prealably homogenised with the train dataset with MatchMixeR algorithm (https://doi.org/10.1093/bioinformatics/btz974).
+When using transcriptomics data, validation datasets are prealably homogenised with the train dataset using MatchMixeR algorithm (https://doi.org/10.1093/bioinformatics/btz974).
 The script for homogenisation is available in [preprocessing.R](preprocessing.R).
 
 
