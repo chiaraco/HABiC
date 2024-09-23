@@ -97,7 +97,7 @@ pred = classification(X, Y, [Xval1,Xval2], [Yval1,Yval2], ['Valid.1','Valid.2'],
 # (here, it will be 'Train', 'Valid.1','Valid.2')
 
 # It will returns a dictonnary with the names of the predicted datasets in keys,
-# and the class predictions for each obsservation in values.
+# and the class predictions for each observation in values.
 
 
 # With the included datasets (in the same folder than the one with functionsHABiC.py file)
