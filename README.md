@@ -102,14 +102,13 @@ params_bagPLS = {'meth':'bagPLS.HABiC', 'NbTrees':50, 'NbVarImp':3}
 # With your own datasets
 #------------------------
 
-pred = classification(X, Y, [Xext1,Xext2], [Yext1,Yext2], ['ExtSet.1','ExtSet.2'], param=params_naive)
+pred = classification(X, Y, [Xext1,Xext2], ['ExtSet.1','ExtSet.2'], param=params_naive)
 # X, Y # train dataset
 # [Xext1,Xext2]  # all dataframes for external validations, with variables in column and observations in row
-# [Yext1,Yext2]  # OPTIONAL all class vectors for external validation, in the same order than the dataframes
 # ['ExtSet.1','ExtSet.2'] # output names to choose for the results table, 'Train' is automatically included
 # (here, it will be 'Train', 'ExtSet.1','ExtSet.2')
 
-# 'Pred' will returns a dictonnary with the names of the predicted datasets in keys,
+# 'pred' will returns a dictionary with the names of the predicted datasets in keys,
 # and the class predictions for each observation in values.
 
 
@@ -121,12 +120,8 @@ pred = classification(X, Y, [Xval1], ['Valid.1'], param=params_naive)
 pred['Train']
 pred['Valid.1']
 
-# with no Y information for external dataset
-pred = classification(X, Y, [Xval1], [Yval1], ['Valid.1'], param=params_naive)
-pred['Train']
-pred['Valid.1']
 # add perfomance function
-
+performances()
 
 
 ```
