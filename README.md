@@ -43,6 +43,7 @@ Xval2, Yval2  # same loading than the train for external validation 2
 # Categorical variables can be included with OneHotEncoder
 # https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
 
+
 # With the included datasets (in the same folder than the one with functionsHABiC.py file)
 #-------------------------------------------------------------------------------------------------
 
@@ -96,12 +97,14 @@ pred = classification(X, Y, [Xval1,Xval2], [Yval1,Yval2], ['Valid.1','Valid.2'],
 pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], param=params_naive)
 # It will returns a dictonnary with in keys, the names of the predicted datasets, and in values, the class predictions for each obsservation
 
+
 # With the included datasets (in the same folder than the one with functionsHABiC.py file)
 #-------------------------------------------------------------------------------------------------
 
 pred = classification(X, Y, [Xval1], [Yval1], ['Valid.1'], param=params_naive)
 pred['Train']
 pred['Valid.1']
+
 
 ```
 
