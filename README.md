@@ -7,9 +7,17 @@ If you are using `conda`, you can install an environment called `HABiCenv`. Firs
 
 Then, open an Anaconda prompt and run the following command :
 ```bash
-> conda env create -f path\to\the\folder\requirements.yml  # path to the folder where the requirements.yml file is.
+> conda env create -f path\to\the\folder\requirements.yml  # path to the folder where the requirements.yml file is
 ```
 ( The installation can take more than 15 min)
+
+IDE is not included in the environement so you can install one if needed
+```bash
+> conda activate HABiCenv
+#if needed:
+> conda install spyder  
+> spyder 
+```
 
 
 ## Usage 
