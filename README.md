@@ -111,6 +111,9 @@ pred = classification(X, Y, [Xext1,Xext2], ['ExtSet.1','ExtSet.2'], param=params
 # 'pred' will returns a dictionary with the names of the predicted datasets in keys,
 # and the class predictions for each observation in values.
 
+# if true class is known, you can add evaluate prediction perfomance
+# here, with the first external dataset :
+perf = performances(Yext1,pred['ExtSet.1'], metr='MCC') # MCC (Matthews correlation coefficient), ACC (accuracy score), AUC (area under the ROC curve)
 
 # With the included datasets (in the same folder than the one with functionsHABiC.py file)
 #-------------------------------------------------------------------------------------------------
@@ -119,11 +122,6 @@ pred = classification(X, Y, [Xext1,Xext2], ['ExtSet.1','ExtSet.2'], param=params
 pred = classification(X, Y, [Xval1], ['Valid.1'], param=params_naive)
 pred['Train']
 pred['Valid.1']
-
-# add perfomance function
-performances()
-
-
 ```
 
 ## Run an example with synthetic data testing all methods with cross validation 
