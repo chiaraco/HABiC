@@ -105,7 +105,7 @@ for fold, (train_index, test_index) in enumerate(sss.split(X,Y)):
     # then, run all classifiers and assess their prediction performance
     for param in params :
         print('--->',param)
-        pred = classification(xtrain_cv, ytrain_cv, [xtest_cv]+Xval, [ytest_cv]+Yval, ['Test']+Nval, param=eval(param))
+        pred = classification(xtrain_cv, ytrain_cv, [xtest_cv]+Xval, ['Test']+Nval, param=eval(param))
         for y_true,samp in zip([ytrain_cv,ytest_cv]+Yval,['Train','Test']+Nval):
             perf = performances(y_true,pred[samp], metr=metr)
                   # add classifier results into 'results' dataframe
