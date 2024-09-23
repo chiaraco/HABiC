@@ -42,8 +42,8 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
         threshold = scores[0].mean()
 
         # prediction performances
-        for y,n,sc in zip([Y]+Yval,['Train']+Nval,scores):
-            pred[n] = predictions(y,sc,threshold)
+        for n,sc in zip(['Train']+Nval,scores):
+            pred[n] = predictions(sc,threshold)
             
 
     ## dimensionality reduction + HABiC
@@ -58,8 +58,8 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
         threshold = scores[0].mean()
 
         # prediction performances
-        for y,n,sc in zip([Y]+Yval,['Train']+Nval,scores):
-            pred[n] = predictions(y,sc,threshold)
+        for n,sc in zip(['Train']+Nval,scores):
+            pred[n] = predictions(sc,threshold)
 
 
     # PLS
@@ -73,7 +73,7 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
         threshold = scores[0].mean()
 
         # prediction performances
-        for y,n,sc in zip([Y]+Yval,['Train']+Nval,scores):
+        for n,sc in zip(['Train']+Nval,scores):
             pred[n] = predictions(y,sc,threshold)
 
 
@@ -87,8 +87,8 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
         threshold = 0.5
 
         # prediction performances
-        for y,n,sc in zip([Y]+Yval,['Train']+Nval,scores):
-            pred[n] = predictions(y,sc,threshold)
+        for n,sc in zip(['Train']+Nval,scores):
+            pred[n] = predictions(sc,threshold)
  
 
     # Random Forest bagging
@@ -100,8 +100,8 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
         threshold = 0.5
 
         # prediction performances
-        for y,n,sc in zip([Y]+Yval,['Train']+Nval,scores):
-            pred[n] = predictions(y,sc,threshold)
+        for n,sc in zip(['Train']+Nval,scores):
+            pred[n] = predictions(sc,threshold)
 
 
     # PLS-DA bagging
@@ -113,8 +113,8 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
         threshold = 0.5
 
         # prediction performances
-        for y,n,sc in zip([Y]+Yval,['Train']+Nval,scores):
-            pred[n] = predictions(y,sc,threshold)
+        for n,sc in zip(['Train']+Nval,scores):
+            pred[n] = predictions(sc,threshold)
 
 
     ## Deep Learning method
@@ -125,10 +125,10 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
         clf.fit(X,Y)
 
         # prediction performances
-        for x,y,n in zip([X]+Xval,[Y]+Yval,['Train']+Nval):
+        for x,n in zip([X]+Xval,['Train']+Nval):
             sc = clf.score_prediction(x)
             if n == 'Train' : threshold = sc.mean()
-            pred[n] = predictions(y,sc,threshold)
+            pred[n] = predictions(sc,threshold)
 
 
     return pred
@@ -267,7 +267,7 @@ def f_test(Xtest,X,Y,phi,psi):
     return ff
 
 
-def naiveHABiC(X,Y,Xval=[],Yval=[],Nval=[],mult=10**2):
+def naiveHABiC(X,Y,Xval=[],Nval=[],mult=10**2):
 
     # cost matrix calculation
     C = CostMatrix(X[Y==0],X[Y==1])
@@ -286,7 +286,7 @@ def naiveHABiC(X,Y,Xval=[],Yval=[],Nval=[],mult=10**2):
     return scores
 
 
-def predictions(y,sc,threshold):
+def predictions(sc,threshold):
     cond = sc>=threshold
     sc[cond]=1
     sc[~cond]=0
@@ -353,11 +353,11 @@ def bagging(X,Y,Xval,Yval,Nval,BagMeth,NbTrees,NbVarImp=None,mult=10**2):
         xb = x1b.groupby(Y).sample(x1b.shape[0]*pct_obs//100,replace=True)
         yb = Y[xb.index]
 
-        scores = naiveHABiC(xb,yb,[data[var_imp] for data in [X]+Xval],[Y]+Yval,['Train']+Nval,mult)
+        scores = naiveHABiC(xb,[data[var_imp] for data in [X]+Xval],['Train']+Nval,mult)
 
         threshold = scores[0].mean()
 
-        for i,(x,y,n,sc) in enumerate(zip([X]+Xval,[Y]+Yval,['Train']+Nval,scores[1:])):
+        for i,(x,n,sc) in enumerate(zip([X]+Xval,['Train']+Nval,scores[1:])):
             cond = sc>=threshold
             sc[cond]=1
             sc[~cond]=0
