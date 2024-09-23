@@ -48,10 +48,10 @@ Xval2, Yval2  # same loading than train dataset for external validation 2
 #-------------------------------------------------------------------------------------------------
 
 to_load = 'data'
-data_train = pd.read_csv(f'{to_load}/train.csv',header=0,index_col=0)
+data_train = pandas.read_csv(f'{to_load}/train.csv',header=0,index_col=0)
 X = data_train.drop('Y',axis=1)
 Y = data_train['Y'].copy()
-data_valid = pd.read_csv(f'{to_load}/valid.csv',header=0,index_col=0)
+data_valid = pandas.read_csv(f'{to_load}/valid.csv',header=0,index_col=0)
 Xval1 = data_valid.drop('Y',axis=1)
 Yval1 = data_valid['Y'].copy()
 
