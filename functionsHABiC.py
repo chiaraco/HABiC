@@ -27,7 +27,7 @@ else: dev = "cpu"
 ###################### FUNCTIONS ######################
 #######################################################
 
-def classification(X,Y,Xval=[],Nval=[],param={'meth':'naive.HABiC'},mult=10**2):
+def classification(X,Y,Xext=[],Next=[],param={'meth':'naive.HABiC'},mult=10**2):
 
     pred = {}
     
@@ -37,12 +37,12 @@ def classification(X,Y,Xval=[],Nval=[],param={'meth':'naive.HABiC'},mult=10**2):
     ## naive HABiC
     if param['meth'] == 'naive.HABiC' :
 
-        scores = naiveHABiC(X,Y,Xval,Nval,mult)
+        scores = naiveHABiC(X,Y,Xext,Next,mult)
 
         threshold = scores[0].mean()
 
         # prediction performances
-        for n,sc in zip(['Train']+Nval,scores):
+        for n,sc in zip(['Train']+Next,scores):
             pred[n] = predictions(sc,threshold)
             
 
@@ -51,14 +51,14 @@ def classification(X,Y,Xval=[],Nval=[],param={'meth':'naive.HABiC'},mult=10**2):
     elif param['meth'] == 'redPCA.HABiC' :
 
         # dimensionality reduction by PCA
-        X_red,Xval_red = reduction(X,Y,Xval,'PCA',param['DimRed'])
+        X_red,Xext_red = reduction(X,Y,Xext,'PCA',param['DimRed'])
 
-        scores = naiveHABiC(X_red,Y,Xval_red,Nval,mult)
+        scores = naiveHABiC(X_red,Y,Xext_red,Next,mult)
 
         threshold = scores[0].mean()
 
         # prediction performances
-        for n,sc in zip(['Train']+Nval,scores):
+        for n,sc in zip(['Train']+Next,scores):
             pred[n] = predictions(sc,threshold)
 
 
@@ -66,14 +66,14 @@ def classification(X,Y,Xval=[],Nval=[],param={'meth':'naive.HABiC'},mult=10**2):
     elif param['meth'] == 'redPLS.HABiC' :
 
         # dimensionality reduction by PLS-DA
-        X_red,Xval_red = reduction(X,Y,Xval,'PLS',param['DimRed'])
+        X_red,Xext_red = reduction(X,Y,Xext,'PLS',param['DimRed'])
 
-        scores = naiveHABiC(X_red,Y,Xval_red,Nval,mult)
+        scores = naiveHABiC(X_red,Y,Xext_red,Next,mult)
 
         threshold = scores[0].mean()
 
         # prediction performances
-        for n,sc in zip(['Train']+Nval,scores):
+        for n,sc in zip(['Train']+Next,scores):
             pred[n] = predictions(sc,threshold)
 
 
@@ -82,12 +82,12 @@ def classification(X,Y,Xval=[],Nval=[],param={'meth':'naive.HABiC'},mult=10**2):
     elif param['meth'] == 'bagSTD.HABiC' :
 
         # standard bagging
-        scores = bagging(X,Y,Xval,Nval,'STD',param['NbTrees'],mult=mult)
+        scores = bagging(X,Y,Xext,Next,'STD',param['NbTrees'],mult=mult)
 
         threshold = 0.5
 
         # prediction performances
-        for n,sc in zip(['Train']+Nval,scores):
+        for n,sc in zip(['Train']+Next,scores):
             pred[n] = predictions(sc,threshold)
  
 
@@ -95,12 +95,12 @@ def classification(X,Y,Xval=[],Nval=[],param={'meth':'naive.HABiC'},mult=10**2):
     elif param['meth'] == 'bagRF.HABiC' :
 
         # standard bagging
-        scores = bagging(X,Y,Xval,Nval,'RF',param['NbTrees'],param['NbVarImp'],mult=mult)
+        scores = bagging(X,Y,Xext,Next,'RF',param['NbTrees'],param['NbVarImp'],mult=mult)
 
         threshold = 0.5
 
         # prediction performances
-        for n,sc in zip(['Train']+Nval,scores):
+        for n,sc in zip(['Train']+Next,scores):
             pred[n] = predictions(sc,threshold)
 
 
@@ -108,12 +108,12 @@ def classification(X,Y,Xval=[],Nval=[],param={'meth':'naive.HABiC'},mult=10**2):
     elif param['meth'] == 'bagPLS.HABiC' :
 
         # standard bagging
-        scores = bagging(X,Y,Xval,Nval,'PLS',param['NbTrees'],param['NbVarImp'],mult=mult)
+        scores = bagging(X,Y,Xext,Next,'PLS',param['NbTrees'],param['NbVarImp'],mult=mult)
 
         threshold = 0.5
 
         # prediction performances
-        for n,sc in zip(['Train']+Nval,scores):
+        for n,sc in zip(['Train']+Next,scores):
             pred[n] = predictions(sc,threshold)
 
 
@@ -125,7 +125,7 @@ def classification(X,Y,Xval=[],Nval=[],param={'meth':'naive.HABiC'},mult=10**2):
         clf.fit(X,Y)
 
         # prediction performances
-        for x,n in zip([X]+Xval,['Train']+Nval):
+        for x,n in zip([X]+Xext,['Train']+Next):
             sc = clf.score_prediction(x)
             if n == 'Train' : threshold = sc.mean()
             pred[n] = predictions(sc,threshold)
@@ -267,7 +267,7 @@ def f_test(Xtest,X,Y,phi,psi):
     return ff
 
 
-def naiveHABiC(X,Y,Xval=[],Nval=[],mult=10**2):
+def naiveHABiC(X,Y,Xext=[],Next=[],mult=10**2):
 
     # cost matrix calculation
     C = CostMatrix(X[Y==0],X[Y==1])
@@ -281,7 +281,7 @@ def naiveHABiC(X,Y,Xval=[],Nval=[],mult=10**2):
     # scores
     scores=[]
     scores.append(f_train(phi,psi,Y))
-    scores.extend([f_test(val,X,Y,phi,psi) for val in Xval])
+    scores.extend([f_test(ext,X,Y,phi,psi) for ext in Xext])
 
     return scores
 
@@ -300,22 +300,22 @@ def performances(y,sc,metr):
         p = auc(fpr,tpr)
     return p
 
-def reduction(X,Y,Xval,RedMeth,DimRed):
+def reduction(X,Y,Xext,RedMeth,DimRed):
     if RedMeth == 'PLS' : transfo = PLSRegression(n_components=DimRed, scale=False)
     elif RedMeth == 'PCA': transfo = PCA(n_components=DimRed)
 
     transfo.fit(X,Y)
     X_red = pd.DataFrame(transfo.transform(X),index=X.index)
-    Xval_red = []
-    for i,val in enumerate(Xval):
-        Xval_red.append(pd.DataFrame(transfo.transform(val),index=val.index))
+    Xext_red = []
+    for i,ext in enumerate(Xext):
+        Xext_red.append(pd.DataFrame(transfo.transform(ext),index=ext.index))
 
-    return X_red,Xval_red
+    return X_red,Xext_red
 
 
 
-def bagging(X,Y,Xval,Nval,BagMeth,NbTrees,NbVarImp=None,mult=10**2):
-    df_scores = [pd.DataFrame(index=data.index,columns=['Tree'+str(i+1) for i in range(NbTrees)]) for data in [X]+Xval]
+def bagging(X,Y,Xext,Next,BagMeth,NbTrees,NbVarImp=None,mult=10**2):
+    df_scores = [pd.DataFrame(index=data.index,columns=['Tree'+str(i+1) for i in range(NbTrees)]) for data in [X]+Xext]
     nb_p = int(X.shape[1]**(1/2))
     pct_obs = 50
 
@@ -353,11 +353,11 @@ def bagging(X,Y,Xval,Nval,BagMeth,NbTrees,NbVarImp=None,mult=10**2):
         xb = x1b.groupby(Y).sample(x1b.shape[0]*pct_obs//100,replace=True)
         yb = Y[xb.index]
 
-        scores = naiveHABiC(xb,yb,[data[var_imp] for data in [X]+Xval],['Train']+Nval,mult)
+        scores = naiveHABiC(xb,yb,[data[var_imp] for data in [X]+Xext],['Train']+Next,mult)
 
         threshold = scores[0].mean()
 
-        for i,(x,n,sc) in enumerate(zip([X]+Xval,['Train']+Nval,scores[1:])):
+        for i,(x,n,sc) in enumerate(zip([X]+Xext,['Train']+Next,scores[1:])):
             cond = sc>=threshold
             sc[cond]=1
             sc[~cond]=0
