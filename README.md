@@ -96,7 +96,6 @@ pred = classification(X, Y, [Xval1,Xval2], [Yval1,Yval2], ['Valid.1','Valid.2'],
 # ['Valid.1','Valid.2'] # output names to choose for the results table, 'Train' is automatically included
 # (here, it will be 'Train', 'Valid.1','Valid.2')
 
-pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], param=params_naive)
 # It will returns a dictonnary with the names of the predicted datasets in keys,
 # and the class predictions for each obsservation in values.
 
