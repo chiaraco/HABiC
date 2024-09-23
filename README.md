@@ -20,23 +20,39 @@ The code can be used as follows:
 #######################################################
 ##### import required functions
 
+# You have to be in the folder where functionsHABiC.py is.
+
 import pandas
 from sklearn.metrics import matthews_corrcoef as MCC
-from functionsHABiC import classification  # you should be in the folder where functionsHABiC.py is.
+from functionsHABiC import classification  #
 
 #######################################################
 ##### load your data
 
-# training data
+# With your own datasets
+#------------------------
+
+# Train data
 X = pandas.read_csv(...) # pandas DataFrame with observations in row, genes in column. 
 Y = pandas.read_csv(...) # pandas Series with class to predict
 
-# validation data
-Xval1, Yval1  # external validation 1
-Xval2, Yval2  # external validation 2
+# Validation data
+Xval1, Yval1  # same loading than the train for external validation 1
+Xval2, Yval2  # same loading than the train for external validation 2
 
 # Categorical variables can be included with OneHotEncoder
 # https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
+
+# With the included datasets (in the same folder than the one with functionsHABiC.py file)
+#-------------------------------------------------------------------------------------------------
+
+to_load = 'data'
+data_train = pd.read_csv(f'{to_load}/train.csv',header=0,index_col=0)
+X = data_train.drop('Y',axis=1)
+Y = data_train['Y'].copy()
+data_valid = pd.read_csv(f'{to_load}/valid.csv',header=0,index_col=0)
+Xval1 = data_valid.drop('Y',axis=1)
+Yval1 = data_valid['Y'].copy()
 
 #######################################################
 ##### choose HABiC parameters (example)
@@ -66,13 +82,26 @@ params_bagPLS = {'meth':'bagPLS.HABiC', 'NbTrees':50, 'NbVarImp':3}
 ```python
 
 #######################################################
-##### run a classifier
+##### run the selected classifier
+
+# With your own datasets
+#------------------------
+
+pred = classification(X, Y, [Xval1,Xval2], [Yval1,Yval2], ['Valid.1','Valid.2'], param=params_naive)
+# X, Y # train dataset
+# [Xval1,Xval2]  # all dataframes for external validations, with variables in column and observations in row
+# [Yval1,Yval2]  # all class vectors for external validation, in the same order than the dataframes
+# ['Valid.1','Valid.2'] # output names to choose for the results table (here, it will be 'Train', 'Valid.1','Valid.2')
 
 pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], param=params_naive)
-# X, Y # train dataset
-# [Xval1,Xval2]  # external validation 1 
-# [Yval,Yval2]  # external validation 2
-# ['Valid.1','Valid.2'] # output names to choose for the results table (here, it will be 'Train', 'Test', 'Valid.1','Valid.2')
+# It will returns a dictonnary with in keys, the names of the predicted datasets, and in values, the class predictions for each obsservation
+
+# With the included datasets (in the same folder than the one with functionsHABiC.py file)
+#-------------------------------------------------------------------------------------------------
+
+pred = classification(X, Y, [Xval1], [Yval1], ['Valid.1'], param=params_naive)
+pred['Train']
+pred['Valid.1']
 
 ```
 
