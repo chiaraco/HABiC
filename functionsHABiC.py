@@ -74,7 +74,7 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
 
         # prediction performances
         for n,sc in zip(['Train']+Nval,scores):
-            pred[n] = predictions(y,sc,threshold)
+            pred[n] = predictions(sc,threshold)
 
 
     ## bagging + HABiC
