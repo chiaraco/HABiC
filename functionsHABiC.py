@@ -37,7 +37,7 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
     ## naive HABiC
     if param['meth'] == 'naive.HABiC' :
 
-        scores = naiveHABiC(X,Y,Xval,Yval,Nval,mult)
+        scores = naiveHABiC(X,Y,Xval,Nval,mult)
 
         threshold = scores[0].mean()
 
@@ -53,7 +53,7 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
         # dimensionality reduction by PCA
         X_red,Xval_red = reduction(X,Y,Xval,'PCA',param['DimRed'])
 
-        scores = naiveHABiC(X_red,Y,Xval_red,Yval,Nval,mult)
+        scores = naiveHABiC(X_red,Y,Xval_red,Nval,mult)
 
         threshold = scores[0].mean()
 
@@ -68,7 +68,7 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
         # dimensionality reduction by PLS-DA
         X_red,Xval_red = reduction(X,Y,Xval,'PLS',param['DimRed'])
 
-        scores = naiveHABiC(X_red,Y,Xval_red,Yval,Nval,mult)
+        scores = naiveHABiC(X_red,Y,Xval_red,Nval,mult)
 
         threshold = scores[0].mean()
 
@@ -82,7 +82,7 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
     elif param['meth'] == 'bagSTD.HABiC' :
 
         # standard bagging
-        scores = bagging(X,Y,Xval,Yval,Nval,'STD',param['NbTrees'],mult=mult)
+        scores = bagging(X,Y,Xval,Nval,'STD',param['NbTrees'],mult=mult)
 
         threshold = 0.5
 
@@ -95,7 +95,7 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
     elif param['meth'] == 'bagRF.HABiC' :
 
         # standard bagging
-        scores = bagging(X,Y,Xval,Yval,Nval,'RF',param['NbTrees'],param['NbVarImp'],mult=mult)
+        scores = bagging(X,Y,Xval,Nval,'RF',param['NbTrees'],param['NbVarImp'],mult=mult)
 
         threshold = 0.5
 
@@ -108,7 +108,7 @@ def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult
     elif param['meth'] == 'bagPLS.HABiC' :
 
         # standard bagging
-        scores = bagging(X,Y,Xval,Yval,Nval,'PLS',param['NbTrees'],param['NbVarImp'],mult=mult)
+        scores = bagging(X,Y,Xval,Nval,'PLS',param['NbTrees'],param['NbVarImp'],mult=mult)
 
         threshold = 0.5
 
@@ -314,7 +314,7 @@ def reduction(X,Y,Xval,RedMeth,DimRed):
 
 
 
-def bagging(X,Y,Xval,Yval,Nval,BagMeth,NbTrees,NbVarImp=None,mult=10**2):
+def bagging(X,Y,Xval,Nval,BagMeth,NbTrees,NbVarImp=None,mult=10**2):
     df_scores = [pd.DataFrame(index=data.index,columns=['Tree'+str(i+1) for i in range(NbTrees)]) for data in [X]+Xval]
     nb_p = int(X.shape[1]**(1/2))
     pct_obs = 50
