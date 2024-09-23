@@ -90,7 +90,7 @@ To run the example code, activate the conda environment and execute the code fro
 
 ## Transcriptomics data preprocessing
 When using transcriptomics data, validation datasets are prealably homogenised with the train dataset using MatchMixeR algorithm (https://doi.org/10.1093/bioinformatics/btz974).
-The script for homogenisation is available in [preprocessing.R](preprocessing.R).
+The script for homogenisation is available in [preprocessing.R](preprocessing.R) (with MatchMixer, the reference dataset (here, train dataset) is not modified, only the validation one).
 
 
 # License
