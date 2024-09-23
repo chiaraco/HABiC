@@ -28,7 +28,7 @@ from functionsHABiC import classification  # you should be in the folder where f
 ##### load your data
 
 # training data
-X = pandas.read_csv(...) # pandas DataFrame with observations in row, genes (and categorical variables) in column
+X = pandas.read_csv(...) # pandas DataFrame with observations in row, genes in column. Categorical variables can be included with OneHotEncoder ((https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html)
 Y = pandas.read_csv(...) # pandas Series with class to predict
 
 # validation data
