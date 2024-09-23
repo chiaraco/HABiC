@@ -47,7 +47,7 @@ Y = pandas.read_csv(...) # pandas Series with class to predict
 # External dataset(s) - Y for external dataset can be loaded if available, to realize performance tests.
 Xval1 = pandas.read_csv(...) # pandas DataFrame with observations in row, genes in column for external dataset 1
 Xval2 = pandas.read_csv(...) # for external dataset 2
-      # Facultative:
+      # Optional:
       Yext1 = pandas.read_csv(...) # pandas Series with class to predict for external dataset 1
       Yext2 = pandas.read_csv(...) # for external dataset 2
 
@@ -105,7 +105,7 @@ params_bagPLS = {'meth':'bagPLS.HABiC', 'NbTrees':50, 'NbVarImp':3}
 pred = classification(X, Y, [Xext1,Xext2], [Yext1,Yext2], ['ExtSet.1','ExtSet.2'], param=params_naive)
 # X, Y # train dataset
 # [Xext1,Xext2]  # all dataframes for external validations, with variables in column and observations in row
-# [Yext1,Yext2]  # FACULTATIVE all class vectors for external validation, in the same order than the dataframes
+# [Yext1,Yext2]  # OPTIONAL all class vectors for external validation, in the same order than the dataframes
 # ['ExtSet.1','ExtSet.2'] # output names to choose for the results table, 'Train' is automatically included
 # (here, it will be 'Train', 'ExtSet.1','ExtSet.2')
 
