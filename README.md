@@ -32,10 +32,11 @@ X = pandas.read_csv(...) # pandas DataFrame with observations in row, genes (and
 Y = pandas.read_csv(...) # pandas Series with class to predict
 
 # validation data
-Xval1, Yval1, Xval2, Yval2 = ...
+Xval1, Yval1  # external validation 1
+Xval2, Yval2  # external validation 2
 
 #######################################################
-##### choose HABiC parameters (exemple)
+##### choose HABiC parameters (example)
 
 # if naive.HABiC
 params_naive = {'meth':'naive.HABiC'}  
@@ -62,14 +63,16 @@ params_bagPLS = {'meth':'bagPLS.HABiC', 'NbTrees':50, 'NbVarImp':3}
 ```python
 
 #######################################################
-##### performances
+##### Run a classifier
 
 pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], param=params_naive)
-
+# X, Y # train dataset
+# Xval1, Yval1  # external validation 1
+# Xval2, Yval2  # external validation 2
 
 ```
 
-## Run example testing all methods with cross validation with synthetic data
+## Run an example with synthetic data testing all methods with cross validation 
 
 For a complete running example on synthetic dataset, please see [scriptHABiC.py](scriptHABiC.py).
 The code generates two DataFrames with prediction performances (mean and standard deviation) of all presented algorithms. 
@@ -82,7 +85,8 @@ To run the example code, simply activate the conda environment and execute the c
 
 
 ## Transcriptomics data preprocessing
-The script [preprocessing.R](preprocessing.R) is available so you can mimic our way of preprocessing transcriptomics data.
+When using transcriptomics data, validation datasets are prealably homogenised with the train dataset with MatchMixeR algorithm (https://doi.org/10.1093/bioinformatics/btz974)
+The script for homogenisation is available in [preprocessing.R](preprocessing.R).
 
 
 # License
