@@ -47,7 +47,7 @@ Nval = ['Val']
 
 
 #######################################################
-##### test all algorihtms (you can change parameters)
+##### test all algorithms (you can change parameters)
 
 
 # if naive.HABiC
@@ -84,19 +84,25 @@ params_WassNN = {'meth':'Wass-NN', 'struct':{'hidden_layer_sizes':(300,300,300),
 ## - 'AUC' (Area Under the Curve)
 metr = 'MCC'
 
+# choose the number of splits fro cross-validation
 nb_CV = 3
 
+# list of parameters of all algorithms to test
 params = ['params_naive', 'params_redPCA', 'params_redPLS', 'params_bagSTD', \
            'params_bagRF', 'params_bagPLS', 'params_WassNN']
 
+# create en empty dataframe to save the results there
 results = pd.DataFrame(index=pd.MultiIndex.from_product([params,[f'CV{cv}' for cv in range(1,nb_CV+1)]]),columns=['Train','Test']+Nval)
 
+# create splits for cross-validation
 sss = StratifiedShuffleSplit(n_splits=nb_CV, test_size=0.3, random_state=0)
 for fold, (train_index, test_index) in enumerate(sss.split(X,Y)):
     print('\nFOLD',fold+1)
+    # for each split, create train/test dataset 
     xtrain_cv, xtest_cv = X.iloc[train_index,:], X.iloc[test_index,:]
     ytrain_cv, ytest_cv = Y.iloc[train_index], Y.iloc[test_index]
 
+    # then, run all classifiers and assess their prediction performance
     for param in params :
         print('--->',param)
         pred = classification(xtrain_cv, ytrain_cv, [xtest_cv]+Xval, [ytest_cv]+Yval, ['Test']+Nval, param=eval(param))
@@ -104,6 +110,7 @@ for fold, (train_index, test_index) in enumerate(sss.split(X,Y)):
             perf = performances(y_true,pred[samp], metr=metr)
             results.loc[(param,f'CV{fold+1}'),samp] = perf
 
+# print results
 print('\nMean',results.groupby(level=0).mean(),'\nStd',results.groupby(level=0).std(),'\n',sep='\n')
 
 
