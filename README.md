@@ -19,6 +19,7 @@ The code can be used as follows:
 ```python
 #######################################################
 ##### import required functions
+
 import pandas
 from sklearn.metrics import matthews_corrcoef as MCC
 from functionsHABiC import classification
@@ -34,13 +35,15 @@ Y = pandas.read_csv(...) # pandas Series with class to predict
 Xval1, Yval1, Xval2, Yval2 = ...
 
 #######################################################
-##### test an algorihtm
-# if naive.HABiC
-params_naive = {'meth':'naive.HABiC'}  # see other implemented methods and their associated parameters in the table below
+##### choose HABiC parameters (exemple)
 
-#######################################################
-##### performances
-pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], param=params_naive)
+# if naive.HABiC
+params_naive = {'meth':'naive.HABiC'}  
+
+# if bagPLS.HABiC
+params_bagPLS = {'meth':'bagPLS.HABiC', 'NbTrees':50, 'NbVarImp':3}
+
+#see all implemented methods and their associated parameters in the table below
 
 ```
 
@@ -56,10 +59,18 @@ pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], 
 | HABiC with bagging and PLS-DA feature selection	| "bagPLS.HABiC" 	    | 'NbTrees' : number of sub-algorithms, 'NbVarImp' : number of features to select	                                            |
 | Wasserstein Neural Netwrok 	                    | "Wass-NN" 	        | 'struct' : net architecture ('hidden_layer_sizes', 'activation', 'solver', 'batch_size', 'learning_rate_init', 'max_iter', 'lambd') |
 
+```python
+
+#######################################################
+##### performances
+
+pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], param=params_naive)
 
 
+```
 
-## Synthetic data
+## Run example testing all methods with cross validation with synthetic data
+
 For a complete running example on synthetic dataset, please see [scriptHABiC.py](scriptHABiC.py).
 The code generates two DataFrames with prediction performances (mean and standard deviation) of all presented algorithms. 
 
