@@ -32,7 +32,8 @@ The code can be used as follows:
 
 import pandas
 from sklearn.metrics import matthews_corrcoef as MCC
-from functionsHABiC import classification  #
+from functionsHABiC import classification
+from functionsHABiC import performances 
 
 #######################################################
 ##### load your data
@@ -102,9 +103,11 @@ params_bagPLS = {'meth':'bagPLS.HABiC', 'NbTrees':50, 'NbVarImp':3}
 # With your own datasets
 #------------------------
 
+# first, use classification function that allows to train the classifier and perform predictions at the same time:
+
 pred = classification(X, Y, [Xext1,Xext2], ['ExtSet.1','ExtSet.2'], param=params_naive)
 # X, Y # train dataset
-# [Xext1,Xext2]  # all dataframes for external validations, with variables in column and observations in row
+# [Xext1,Xext2]  # all dataframes for external datasets, with variables in column and observations in row
 # ['ExtSet.1','ExtSet.2'] # output names to choose for the results table, 'Train' is automatically included
 # (here, it will be 'Train', 'ExtSet.1','ExtSet.2')
 
@@ -112,19 +115,22 @@ pred = classification(X, Y, [Xext1,Xext2], ['ExtSet.1','ExtSet.2'], param=params
 # and the class predictions for each observation in values.
 # example : you can access to the predictions of 'ExtSet.1' by pred['ExtSet.1]
 
-# if true class is known, you can add evaluate prediction perfomance
-# here, with the first external dataset :
-# available metrics : 'MCC' (Matthews correlation coefficient), 'ACC' (accuracy score), 'AUC' (area under the ROC curve)
+# then, performances function allows to evaluate prediction perfomance if the true class is known,
+
 perf = performances(Yext1,pred['ExtSet.1'], metr='MCC')
+# available metrics : 'MCC' (Matthews correlation coefficient), 'ACC' (accuracy score), 'AUC' (area under the ROC curve)
+
 
 # With the included datasets (in the same folder than the one with functionsHABiC.py file)
 #-------------------------------------------------------------------------------------------------
 
+# Classifier training and prediction:
 pred = classification(X, Y, [Xval1], ['Valid.1'], param=params_naive)
 
-# evaluate prediction perfomance
-# available metrics : 'MCC' (Matthews correlation coefficient), 'ACC' (accuracy score), 'AUC' (area under the ROC curve)
-perf = performances(Yval1,pred['Valid.1'], metr='MCC')
+# prediction performance (# available metrics : 'MCC', 'AUC', 'ACC')
+perf = performances(Yval1,pred['Valid.1'], metr='MCC') 
+
+
 ```
 
 ## Run an example with synthetic data testing all methods with cross validation 
