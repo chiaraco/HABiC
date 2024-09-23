@@ -32,13 +32,13 @@ from functionsHABiC import classification  #
 # With your own datasets
 #------------------------
 
-# Train data
+# Train dataset
 X = pandas.read_csv(...) # pandas DataFrame with observations in row, genes in column. 
 Y = pandas.read_csv(...) # pandas Series with class to predict
 
-# Validation data
-Xval1, Yval1  # same loading than the train for external validation 1
-Xval2, Yval2  # same loading than the train for external validation 2
+# Validation dataset(s)
+Xval1, Yval1  # same loading than train dataset for external validation 1
+Xval2, Yval2  # same loading than train dataset for external validation 2
 
 # Categorical variables can be included with OneHotEncoder
 # https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
