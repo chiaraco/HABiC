@@ -111,7 +111,6 @@ pred = classification(X, Y, [Xext1,Xext2], ['ExtSet.1','ExtSet.2'], param=params
 # 'pred' will returns a dictionary with the names of the predicted datasets in keys,
 # and the class predictions for each observation in values.
 # example : you can access to the predictions of 'ExtSet.1' by pred['ExtSet.1]
-print(pred['ExtSet.1])
 
 # if true class is known, you can add evaluate prediction perfomance
 # here, with the first external dataset :
