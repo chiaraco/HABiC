@@ -22,7 +22,7 @@ The IDE is not included in the environment, so you can install one if necessary.
 
 ## Usage 
 
-The code can be used as follows:
+The algorithm can be used as follows:
 
 ```python
 #######################################################
