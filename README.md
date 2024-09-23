@@ -49,7 +49,7 @@ Xval1 = pandas.read_csv(...) # pandas DataFrame with observations in row, genes 
 Xval2 = pandas.read_csv(...) # obs/gene dataframe for external dataset 2
 # Optional:
 Yext1 = pandas.read_csv(...) # pandas Series with class to predict for external dataset 1
-Yext2 = pandas.read_csv(...) # Class to predict for external dataset 2
+Yext2 = pandas.read_csv(...) # class to predict for external dataset 2
 
 # Categorical variables can be included with OneHotEncoder
 # https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
@@ -113,7 +113,8 @@ pred = classification(X, Y, [Xext1,Xext2], ['ExtSet.1','ExtSet.2'], param=params
 
 # if true class is known, you can add evaluate prediction perfomance
 # here, with the first external dataset :
-perf = performances(Yext1,pred['ExtSet.1'], metr='MCC') # MCC (Matthews correlation coefficient), ACC (accuracy score), AUC (area under the ROC curve)
+# available metrics : 'MCC' (Matthews correlation coefficient), 'ACC' (accuracy score), 'AUC' (area under the ROC curve)
+perf = performances(Yext1,pred['ExtSet.1'], metr='MCC')
 
 # With the included datasets (in the same folder than the one with functionsHABiC.py file)
 #-------------------------------------------------------------------------------------------------
