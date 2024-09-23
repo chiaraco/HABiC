@@ -106,16 +106,17 @@ params_bagPLS = {'meth':'bagPLS.HABiC', 'NbTrees':50, 'NbVarImp':3}
 # first, use classification function that allows to train the classifier and perform predictions at the same time:
 
 pred = classification(X, Y, [Xext1,Xext2], ['ExtSet.1','ExtSet.2'], param=params_naive)
-# X, Y # train dataset
-# [Xext1,Xext2]  # all dataframes for external datasets, with variables in column and observations in row
-# ['ExtSet.1','ExtSet.2'] # output names to choose for the results table, 'Train' is automatically included
-# (here, it will be 'Train', 'ExtSet.1','ExtSet.2')
+         # X, Y # train dataset
+         # [Xext1,Xext2]  # all dataframes for external datasets, with variables in column and observations in row
+         # ['ExtSet.1','ExtSet.2'] # output names to choose for the results table, 'Train' is automatically included
+         # (here, it will be 'Train', 'ExtSet.1','ExtSet.2')
 
 # 'pred' will returns a dictionary with the names of the predicted datasets in keys,
 # and the class predictions for each observation in values.
-# example : you can access to the predictions of 'ExtSet.1' by pred['ExtSet.1]
+# example : you can access to the predictions of 'ExtSet.1'with:
+pred['ExtSet.1]
 
-# then, performances function allows to evaluate prediction perfomance if the true class is known,
+# then, performances function allows to evaluate prediction perfomance if the true class is known:
 
 perf = performances(Yext1,pred['ExtSet.1'], metr='MCC')
 # available metrics : 'MCC' (Matthews correlation coefficient), 'ACC' (accuracy score), 'AUC' (area under the ROC curve)
