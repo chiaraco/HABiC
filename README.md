@@ -9,7 +9,7 @@ Then, open an Anaconda prompt and run the following command :
 ```bash
 > conda env create -f path\to\the\folder\requirements.yml  # path to the folder where the requirements.yml file is.
 ```
-(Installation can take more than 15 min)
+( The installation can take more than 15 min)
 
 
 ## Usage 
@@ -48,9 +48,11 @@ Xval2, Yval2  # same loading than train dataset for external validation 2
 #-------------------------------------------------------------------------------------------------
 
 to_load = 'data'
+
 data_train = pandas.read_csv(f'{to_load}/train.csv',header=0,index_col=0)
 X = data_train.drop('Y',axis=1)
 Y = data_train['Y'].copy()
+
 data_valid = pandas.read_csv(f'{to_load}/valid.csv',header=0,index_col=0)
 Xval1 = data_valid.drop('Y',axis=1)
 Yval1 = data_valid['Y'].copy()
