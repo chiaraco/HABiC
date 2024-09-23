@@ -103,7 +103,7 @@ params_bagPLS = {'meth':'bagPLS.HABiC', 'NbTrees':50, 'NbVarImp':3}
 # With your own datasets
 #------------------------
 
-# first, use classification function that allows to train the classifier and perform predictions at the same time:
+# first, use 'classification' function that allows to train the classifier and perform predictions at the same time:
 
 pred = classification(X, Y, [Xext1,Xext2], ['ExtSet.1','ExtSet.2'], param=params_naive)
          # X, Y # train dataset
@@ -116,7 +116,7 @@ pred = classification(X, Y, [Xext1,Xext2], ['ExtSet.1','ExtSet.2'], param=params
 # example : you can access to the predictions of 'ExtSet.1'with:
 pred['ExtSet.1]
 
-# then, performances function allows to evaluate prediction perfomance if the true class is known:
+# then, 'performances' function allows to evaluate prediction performance if the true class is known:
 
 perf = performances(Yext1,pred['ExtSet.1'], metr='MCC')
 # available metrics : 'MCC' (Matthews correlation coefficient), 'ACC' (accuracy score), 'AUC' (area under the ROC curve)
