@@ -9,7 +9,7 @@ Then, open an Anaconda prompt and run the following command :
 ```bash
 > conda env create -f path\to\the\folder\requirements.yml  # path to the folder where the requirements.yml file is.
 ```
-(it can take more than 15 min)
+(Installation can take more than 15 min)
 
 
 ## Usage 
