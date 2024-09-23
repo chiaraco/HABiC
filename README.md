@@ -11,7 +11,7 @@ Then, open an Anaconda prompt and run the following command :
 ```
 ( The installation can take more than 15 min)
 
-IDE is not included in the environement so you can install one if needed
+The IDE is not included in the environment, so you can install one if necessary.
 ```bash
 > conda activate HABiCenv
 #if needed:
