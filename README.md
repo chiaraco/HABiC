@@ -122,7 +122,7 @@ perf = performances(Yext1,pred['ExtSet.1'], metr='MCC')
 # available metrics : 'MCC' (Matthews correlation coefficient), 'ACC' (accuracy score), 'AUC' (area under the ROC curve)
 
 
-# With the included datasets (in the same folder than the one with functionsHABiC.py file)
+# With the included datasets (loaded above)
 #-------------------------------------------------------------------------------------------------
 
 # Classifier training and prediction:
