@@ -93,10 +93,10 @@ pred = classification(X, Y, [Xval1,Xval2], [Yval1,Yval2], ['Valid.1','Valid.2'],
 # X, Y # train dataset
 # [Xval1,Xval2]  # all dataframes for external validations, with variables in column and observations in row
 # [Yval1,Yval2]  # all class vectors for external validation, in the same order than the dataframes
-# ['Valid.1','Valid.2'] # output names to choose for the results table (here, it will be 'Train', 'Valid.1','Valid.2')
+# ['Valid.1','Valid.2'] # output names to choose for the results table, 'Train' is automatically included (here, it will be 'Train', 'Valid.1','Valid.2')
 
 pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], param=params_naive)
-# It will returns a dictonnary with in keys, the names of the predicted datasets, and in values, the class predictions for each obsservation
+# It will returns a dictonnary with the names of the predicted datasets in keys, and the class predictions for each obsservation in values.
 
 
 # With the included datasets (in the same folder than the one with functionsHABiC.py file)
@@ -105,6 +105,7 @@ pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], 
 pred = classification(X, Y, [Xval1], [Yval1], ['Valid.1'], param=params_naive)
 pred['Train']
 pred['Valid.1']
+
 
 
 ```
