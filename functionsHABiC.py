@@ -27,7 +27,7 @@ else: dev = "cpu"
 ###################### FUNCTIONS ######################
 #######################################################
 
-def classification(X,Y,Xval=[],Yval=[],Nval=[],param={'meth':'naive.HABiC'},mult=10**2):
+def classification(X,Y,Xval=[],Nval=[],param={'meth':'naive.HABiC'},mult=10**2):
 
     pred = {}
     
@@ -353,7 +353,7 @@ def bagging(X,Y,Xval,Nval,BagMeth,NbTrees,NbVarImp=None,mult=10**2):
         xb = x1b.groupby(Y).sample(x1b.shape[0]*pct_obs//100,replace=True)
         yb = Y[xb.index]
 
-        scores = naiveHABiC(xb,[data[var_imp] for data in [X]+Xval],['Train']+Nval,mult)
+        scores = naiveHABiC(xb,yb,[data[var_imp] for data in [X]+Xval],['Train']+Nval,mult)
 
         threshold = scores[0].mean()
 
