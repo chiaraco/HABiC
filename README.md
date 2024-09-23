@@ -140,7 +140,7 @@ The script for homogenisation is available in [preprocessing.R](preprocessing.R)
 
 # License
 
-   Copyright 2024 INSTITUT DE CANCEROLOGIE DE L'OUEST and UNIVERSITE ANGERS
+   Copyright 2024 INSTITUT DE CANCEROLOGIE DE L'OUEST (ICO) and UNIVERSITE ANGERS
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
