@@ -68,11 +68,11 @@ params_bagPLS = {'meth':'bagPLS.HABiC', 'NbTrees':50, 'NbVarImp':3}
 #######################################################
 ##### run a classifier
 
-pred = classification(X, Y, [Xval1,Xval2], [Yval1,Yval2], ['Valid.1','Valid.2'], param=params_naive)
+pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], param=params_naive)
 # X, Y # train dataset
-# Xval1, Yval1  # external validation 1
-# Xval2, Yval2  # external validation 2
-# 'Valid.1', 'Valid.2' # names of validation datasets
+# [Xval1,Xval2]  # external validation 1 
+# [Yval,Yval2]  # external validation 2
+# ['Valid.1','Valid.2'] # output names to choose for the results table (here, it will be 'train', 'test', 'valid1','valid2)
 
 ```
 
