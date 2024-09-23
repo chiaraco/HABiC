@@ -5,10 +5,12 @@ To install requirements, refer to the [`requirements.yml`](requirements.yml) fil
 
 If you are using `conda`, you can install an environment called `HABiCenv`. First, clone this repository ([Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)), or download ([Downloading a repository](https://docs.github.com/en/get-started/start-your-journey/downloading-files-from-github)) and unpack it. 
 
-Then, open an Anaconda prompt in the HABiC folder and run the following command :
+Then, open an Anaconda prompt and run the following command :
 ```bash
-> conda env create -f requirements.yml
+> conda env create -f path\to\the\folder\requirements.yml  # path to the folder where the requirements.yml file is.
 ```
+(it can take more than 15 min)
+
 
 ## Usage 
 
@@ -34,11 +36,12 @@ Xval1, Yval1, Xval2, Yval2 = ...
 #######################################################
 ##### test an algorihtm
 # if naive.HABiC
-params_naive = {'meth':'naive.HABiC'}
+params_naive = {'meth':'naive.HABiC'}  # see other implemented methods and their associated parameters in the table below
 
 #######################################################
 ##### performances
 pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], param=params_naive)
+
 ```
 
 
@@ -46,9 +49,9 @@ pred = classification(X, Y, [Xval1,Xval2], [Yval,Yval2], ['Valid.1','Valid.2'], 
 | Method 						                    | Key 					| Parameters 										                                                                            |
 |:--------------------------------------------------|:----------------------|:------------------------------------------------------------------------------------------------------------------------------|
 | HABiC (naive approach)	                        | "naive.HABiC" 		|                                         			                                                                            |
-| HABiC after reduction by PCA					    | "redPCA.HABiC" 		| 'DimRed' : reduction dimension            	                                                                                |
-| HABiC after reduction by PLS-DA				    | "redPLS.HABiC" 		| 'DimRed' : reduction dimension    					                                                                        |
-| HABiC with standard bagging				        | "bagSTD.HABiC" 		| 'NbTrees' : number of sub-algorithms				                                                                            |
+| HABiC after reduction by PCA					    | "redPCA.HABiC" 		| 'DimRed' : dimension reduction to select            	                                                                                |
+| HABiC after reduction by PLS-DA				    | "redPLS.HABiC" 		| 'DimRed' : dimension reduction to select    					                                                                        |
+| HABiC with standard bagging				        | "bagSTD.HABiC" 		| 'NbTrees' : number of sub-algorithms	to select  			                                                                            |
 | HABiC with bagging and RF feature selection 		| "bagRF.HABiC" 		| 'NbTrees' : number of sub-algorithms, 'NbVarImp' : number of features to select	                                            |
 | HABiC with bagging and PLS-DA feature selection	| "bagPLS.HABiC" 	    | 'NbTrees' : number of sub-algorithms, 'NbVarImp' : number of features to select	                                            |
 | Wasserstein Neural Netwrok 	                    | "Wass-NN" 	        | 'struct' : net architecture ('hidden_layer_sizes', 'activation', 'solver', 'batch_size', 'learning_rate_init', 'max_iter', 'lambd') |
