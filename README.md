@@ -66,8 +66,8 @@ X = data_train.drop('Y',axis=1)
 Y = data_train['Y'].copy()
 
 data_valid = pandas.read_csv(f'{to_load}/valid.csv',header=0,index_col=0)
-Xext1 = data_valid.drop('Y',axis=1)
-Yext1 = data_valid['Y'].copy() # Y for validation is not required, but can be loaded in order to allow perfomance evaluation
+Xval1 = data_valid.drop('Y',axis=1)
+Yval1 = data_valid['Y'].copy() # Y for validation is not required, but can be loaded in order to allow perfomance evaluation
 
 
 #######################################################
@@ -114,7 +114,7 @@ pred = classification(X, Y, [Xext1,Xext2], ['ExtSet.1','ExtSet.2'], param=params
 # 'pred' will returns a dictionary with the names of the predicted datasets in keys,
 # and the class predictions for each observation in values.
 # example : you can access to the predictions of 'ExtSet.1'with:
-pred['ExtSet.1]
+pred['ExtSet.1']
 
 # then, 'performances' function allows to evaluate prediction performance if the true class is known:
 
