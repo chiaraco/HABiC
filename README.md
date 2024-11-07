@@ -46,8 +46,8 @@ X = pandas.read_csv(...) # pandas DataFrame with observations in row, genes in c
 Y = pandas.read_csv(...) # pandas Series with class to predict
 
 # External dataset(s) - Y for external dataset can be loaded if available, to realize performance tests.
-Xval1 = pandas.read_csv(...) # pandas DataFrame with observations in row, genes in column for external dataset 1
-Xval2 = pandas.read_csv(...) # obs/gene dataframe for external dataset 2
+Xext1 = pandas.read_csv(...) # pandas DataFrame with observations in row, genes in column for external dataset 1
+Xext2 = pandas.read_csv(...) # obs/gene dataframe for external dataset 2
 # Optional:
 Yext1 = pandas.read_csv(...) # pandas Series with class to predict for external dataset 1
 Yext2 = pandas.read_csv(...) # class to predict for external dataset 2
