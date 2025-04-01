@@ -126,7 +126,7 @@ def classification(X,Y,Xext=[],Next=[],param={'meth':'naive.HABiC'},mult=10**2):
 
         # prediction performances
         for x,n in zip([X]+Xext,['Train']+Next):
-            sc = clf.score_prediction(x)
+            sc = clf.score_prediction(x).numpy()
             if n == 'Train' : threshold = sc.mean()
             pred[n] = predictions(sc,threshold)
 
@@ -241,10 +241,10 @@ class HungarianAlgo: #### inspired by https://gist.github.com/KartikTalwar/31585
 
 
 def f_train(phi,psi,Y):
-    f_X = Y.copy()
+    f_X = Y.copy().astype('float64')
     i,j=0,0
     for nb in range(len(f_X)):
-        if f_X.iloc[nb] == 0 :
+        if f_X.iloc[nb] == 0.0 :
             f_X.iloc[nb]=-phi[i]
             i+=1
         else :
@@ -290,7 +290,7 @@ def predictions(sc,threshold):
     cond = sc>=threshold
     sc[cond]=1
     sc[~cond]=0
-    return sc
+    return sc.astype('int64')
 
 def performances(y,sc,metr):
     if metr=='MCC' : p = MCC(y,sc)
@@ -362,7 +362,7 @@ def bagging(X,Y,Xext,Next,BagMeth,NbTrees,NbVarImp=None,mult=10**2):
             sc[cond]=1
             sc[~cond]=0
 
-            df_scores[i]['Tree'+str(T+1)].loc[x.index] = sc
+            df_scores[i].loc[x.index, 'Tree'+str(T+1)] = sc
 
     return [sc.mean(axis=1) for sc in df_scores]
 
