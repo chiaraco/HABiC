@@ -89,7 +89,7 @@ nb_CV = 3
 
 # list of parameters of all algorithms to test
 params = ['params_naive', 'params_redPCA', 'params_redPLS', 'params_bagSTD', \
-           'params_bagRF', 'params_bagPLS', 'params_WassNN']
+          'params_bagRF', 'params_bagPLS', 'params_WassNN']
 
 # create en empty dataframe to save the results there
 results = pd.DataFrame(index=pd.MultiIndex.from_product([params,[f'CV{cv}' for cv in range(1,nb_CV+1)]]),columns=['Train','Test']+Nval)
