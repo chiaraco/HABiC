@@ -147,14 +147,20 @@ To run the example code, activate the conda environment and execute the code fro
 
 
 ## Transcriptomics data preprocessing
-When using transcriptomics data, validation datasets are prealably homogenised with the train dataset using MatchMixeR algorithm (https://doi.org/10.1093/bioinformatics/btz974).
+When using transcriptomics data, validation datasets could be homogenised with the train dataset using MatchMixeR algorithm (https://doi.org/10.1093/bioinformatics/btz974).
 The script for homogenisation is available in [preprocessing.R](preprocessing.R) (with MatchMixer, the reference dataset (here, train dataset) is not modified, only the validation one).
-Train and external validation datasets after homogenisation (including class to predict and standard prognostic variables) are available on Zenodo: [10.5281/zenodo.15091117](https://doi.org/10.5281/zenodo.15091117)
 
+Train and external validation datasets (including class to predict and standard prognostic variables) are available on Zenodo: [10.5281/zenodo.15091117](https://doi.org/10.5281/zenodo.15091117)
+
+After homogenisation  : 
 METABRIC dataset was initially downloaded from https://www.cbioportal.org/study/summary?id=brca_metabric (data_expression_median.txt).
 Buffa dataset was initially downloaded from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE22219 (GSE22219_non-normalized_data_mRNA.csv).
 Hatzis dataset was initally downloaded from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE25055  (.CEL download then mas5 normalization).
+METABRIC was used as train dataset. Buffa and Hatzis were used as validation datasets.
 
+Without homogenisation (two experiments) : 
+1/ Broad train dataset was initially downloaded from https://singlecell.broadinstitute.org/single_cell/study/SCP1039 and the external validation Xu from https://zenodo.org/records/10672250.
+2/ Zhang train dataset was initially downloaded from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE40791, and the other two external validations Hou from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE19188 and Seo from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE40419.
 
 # License
 
