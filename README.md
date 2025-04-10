@@ -159,7 +159,7 @@ Hatzis dataset was initally downloaded from https://www.ncbi.nlm.nih.gov/geo/que
 METABRIC was used as train dataset. Buffa and Hatzis were used as validation datasets.
 
 Without homogenisation (two experiments) : <br/>
-1/ Broad train dataset was initially downloaded from https://singlecell.broadinstitute.org/single_cell/study/SCP1039 and the external validation Xu from https://zenodo.org/records/10672250.
+1/ Broad train dataset was initially downloaded from https://singlecell.broadinstitute.org/single_cell/study/SCP1039 and the external validation Xu from https://zenodo.org/records/10672250. <br/>
 2/ Zhang train dataset was initially downloaded from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE40791, and the other two external validations Hou from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE19188 and Seo from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE40419.
 
 # License
