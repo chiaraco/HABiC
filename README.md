@@ -152,13 +152,13 @@ The script for homogenisation is available in [preprocessing.R](preprocessing.R)
 
 Train and external validation datasets (including class to predict and standard prognostic variables) are available on Zenodo: [10.5281/zenodo.15091117](https://doi.org/10.5281/zenodo.15091117)
 
-After homogenisation  : 
+After homogenisation  : <br/>
 METABRIC dataset was initially downloaded from https://www.cbioportal.org/study/summary?id=brca_metabric (data_expression_median.txt).
 Buffa dataset was initially downloaded from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE22219 (GSE22219_non-normalized_data_mRNA.csv).
 Hatzis dataset was initally downloaded from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE25055  (.CEL download then mas5 normalization).
 METABRIC was used as train dataset. Buffa and Hatzis were used as validation datasets.
 
-Without homogenisation (two experiments) : 
+Without homogenisation (two experiments) : <br/>
 1/ Broad train dataset was initially downloaded from https://singlecell.broadinstitute.org/single_cell/study/SCP1039 and the external validation Xu from https://zenodo.org/records/10672250.
 2/ Zhang train dataset was initially downloaded from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE40791, and the other two external validations Hou from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE19188 and Seo from https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE40419.
 
